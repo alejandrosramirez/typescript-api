@@ -1,7 +1,6 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { RequestContract } from "@ioc:Adonis/Core/Request";
 import { rules, schema } from "@ioc:Adonis/Core/Validator";
-import User from "App/Models/User";
 
 export default class AuthenticateController {
 	public async login({ auth, request, response }: HttpContextContract) {
