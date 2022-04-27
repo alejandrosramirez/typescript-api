@@ -50,6 +50,9 @@ const databaseConfig: DatabaseConfig = {
 			useNullAsDefault: true,
 			healthCheck: false,
 			debug: false,
+			seeders: {
+				paths: ["./database/seeders/main"],
+			},
 		},
 
 		/*
@@ -77,6 +80,9 @@ const databaseConfig: DatabaseConfig = {
 			},
 			healthCheck: false,
 			debug: false,
+			seeders: {
+				paths: ["./database/seeders/main"],
+			},
 		},
 
 		/*
@@ -104,6 +110,9 @@ const databaseConfig: DatabaseConfig = {
 			},
 			healthCheck: false,
 			debug: false,
+			seeders: {
+				paths: ["./database/seeders/main"],
+			},
 		},
 
 		/*
@@ -131,6 +140,9 @@ const databaseConfig: DatabaseConfig = {
 			},
 			healthCheck: false,
 			debug: false,
+			seeders: {
+				paths: ["./database/seeders/main"],
+			},
 		},
 
 		/*
@@ -158,6 +170,9 @@ const databaseConfig: DatabaseConfig = {
 			},
 			healthCheck: false,
 			debug: false,
+			seeders: {
+				paths: ["./database/seeders/main"],
+			},
 		},
 	},
 };

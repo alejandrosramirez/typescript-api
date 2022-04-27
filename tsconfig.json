@@ -25,7 +25,9 @@
 			"@adonisjs/bouncer",
 			"@adonisjs/i18n",
 			"@adonisjs/mail",
-			"@adonisjs/redis"
+			"@adonisjs/redis",
+			"adonis-request-throttler",
+			"adonis-lucid-soft-deletes"
 		]
 	}
 }

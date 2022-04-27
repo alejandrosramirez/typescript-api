@@ -1,9 +1,24 @@
 import { DateTime } from "luxon";
 import Hash from "@ioc:Adonis/Core/Hash";
-import { column, beforeSave, BaseModel } from "@ioc:Adonis/Lucid/Orm";
+import { compose } from "@ioc:Adonis/Core/Helpers";
+import {
+	column,
+	beforeSave,
+	BaseModel,
+	manyToMany,
+	ManyToMany,
+	hasOne,
+	HasOne,
+} from "@ioc:Adonis/Lucid/Orm";
 import { v4 as uuidV4 } from "uuid";
+import { SoftDeletes } from "@ioc:Adonis/Addons/LucidSoftDeletes";
 
-export default class User extends BaseModel {
+// own
+import Permission from "App/Models/Permission/Permission";
+import Role from "App/Models/Permission/Role";
+import Profile from "App/Models/Profile";
+
+export default class User extends compose(BaseModel, SoftDeletes) {
 	@column({ isPrimary: true })
 	public id: number;
 
@@ -47,4 +62,16 @@ export default class User extends BaseModel {
 			user.uuid = uuidV4();
 		}
 	}
+
+	@manyToMany(() => Permission, {
+		pivotTable: "permission_user",
+		pivotTimestamps: true,
+	})
+	public permissions: ManyToMany<typeof Permission>;
+
+	@manyToMany(() => Role, { pivotTable: "role_user", pivotTimestamps: true })
+	public roles: ManyToMany<typeof Role>;
+
+	@hasOne(() => Profile)
+	public profile: HasOne<typeof Profile>;
 }

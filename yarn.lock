@@ -149,7 +149,7 @@
     dotenv "^16.0.0"
     validator "^13.7.0"
 
-"@adonisjs/events@^7.2.1":
+"@adonisjs/events@^7.0.1", "@adonisjs/events@^7.2.1":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@adonisjs/events/-/events-7.2.1.tgz#7d0a6c71ebfa754e90c6068b6af75a6e6e5719a8"
   integrity sha512-N+ewQ19pvdWVIRGBeio1GqlMRJpHpZ+ZHCjhObI+bqoCh5nBApumW0JYe4blyMnUbUAtA9Aq1m1QbGaE7pRMcw==
@@ -268,7 +268,7 @@
     "@poppinss/utils" "^4.0.3"
     jest-worker "^27.5.1"
 
-"@adonisjs/redis@^7.2.0":
+"@adonisjs/redis@^7.0.4", "@adonisjs/redis@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@adonisjs/redis/-/redis-7.2.0.tgz#b09eb3c49290a56b4dd75c83723620ed01c1bac8"
   integrity sha512-R06p5gNgiuCCPetD2p4GKk013AYYbWKf12mqYHkSZZ5sM3er3gXmYMI+ZfDoid8sIA/QOKM1Xyx5gUa7VXwRjQ==
@@ -1334,10 +1334,35 @@ acorn@^8.0.5, acorn@^8.7.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.1.tgz#0197122c843d1bf6d0a5e83220a788f278f63c30"
   integrity sha512-Xx54uLJQZ19lKygFXOWsscKUbsBZW0CPykPhVQdhIeIwrbPmJzqeASDInc8nKBnp/JT6igTs82qPXz069H8I/A==
 
+adonis-lucid-soft-deletes@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/adonis-lucid-soft-deletes/-/adonis-lucid-soft-deletes-1.3.3.tgz#654f8c10ea7e646eb440a7fb18374d0b40bac906"
+  integrity sha512-4Dc1Tk5Y2BfCcCgkyUF2RI9ZgXBnnuvWNpeQ/phnjF4y6yPjZuEHR4AU7y03NkIMtXLpmKyArIQqQuWile/1Fg==
+
 adonis-preset-ts@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/adonis-preset-ts/-/adonis-preset-ts-2.1.0.tgz#3fccdee1c82c574114dc089d8c76dddf5a223054"
   integrity sha512-cQH/NP250gOF9k3TTDhVsTOPSAvyH4MhKVZ4ryYiihA+vnP27sut1gVIrRas3Evl5d2wEgWVGI5DgdP/ZFSk0w==
+
+adonis-request-throttler@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/adonis-request-throttler/-/adonis-request-throttler-2.0.3.tgz#bfe6fe6073487dc63e1760c2b7b299394f210d97"
+  integrity sha512-ZwdbD8gSM600ZO8fDUmP6NAlVrbOd6l1KhTn00sRfa9gMylWHkszMlKlJmRB/Vl+zHoC97tMi4t1BFJmKU/IVQ==
+  dependencies:
+    "@adonisjs/events" "^7.0.1"
+    "@adonisjs/redis" "^7.0.4"
+    adonis5-cache "^1.3.1"
+    dayjs "^1.10.5"
+    ms "^2.1.3"
+
+adonis5-cache@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/adonis5-cache/-/adonis5-cache-1.3.1.tgz#568273d2b8e704e9dd87983fd3ec36f11507eade"
+  integrity sha512-pz4ObWk7QdP6xXuKOV3LLrOezHsgNsXnSTZfRzz07VTlgFHZoMud7Aoae1FaUPZyaWdUQJBIi/SoqHYszqfijQ==
+  dependencies:
+    dayjs "^1.10.4"
+    ms "^2.1.2"
+    ramda "^0.27.1"
 
 agent-base@6:
   version "6.0.2"
@@ -2242,6 +2267,11 @@ dateformat@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.6.3.tgz#556fa6497e5217fedb78821424f8a1c22fa3f4b5"
   integrity sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==
+
+dayjs@^1.10.4, dayjs@^1.10.5:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.1.tgz#90b33a3dda3417258d48ad2771b415def6545eb0"
+  integrity sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -4349,7 +4379,7 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-ms@2.1.3, ms@^2.1.1, ms@^2.1.3:
+ms@2.1.3, ms@^2.1.1, ms@^2.1.2, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
@@ -5110,6 +5140,11 @@ quick-lru@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
+
+ramda@^0.27.1:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.2.tgz#84463226f7f36dc33592f6f4ed6374c48306c3f1"
+  integrity sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==
 
 random-bytes@~1.0.0:
   version "1.0.0"
