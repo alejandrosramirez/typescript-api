@@ -11,7 +11,7 @@ export default class IndexSeeder extends BaseSeeder {
 	}
 
 	public async run() {
-		await this.runSeeder(await import("../RolesAndPermissions"));
-		await this.runSeeder(await import("../Users"));
+		await this.runSeeder(await import("../RolesAndPermissionsSeeder"));
+		await this.runSeeder(await import("../UsersSeeder"));
 	}
 }

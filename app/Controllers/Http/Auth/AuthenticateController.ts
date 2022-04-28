@@ -18,6 +18,20 @@ export default class AuthenticateController {
 		});
 	}
 
+	public async profile({ auth, response }: HttpContextContract) {
+		const user = auth.user;
+
+		await user?.load((loader) => {
+			loader.load("profile").load("roles", (query) => {
+				query.preload("permissions");
+			});
+		});
+
+		return response.json({
+			user,
+		});
+	}
+
 	private async handleRequest(request: RequestContract) {
 		const validateSchema = schema.create({
 			email: schema.string({ trim: true }, [rules.email()]),

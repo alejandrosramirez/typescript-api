@@ -9,11 +9,15 @@ import { Exception } from "@adonisjs/core/build/standalone";
 | a status code and error code for every exception.
 |
 | @example
-| new DefaultException('message', 500, 'E_RUNTIME_EXCEPTION')
+| new UnauthorizedException('message', 500, 'E_RUNTIME_EXCEPTION')
 |
 */
-export default class DefaultException extends Exception {
-	constructor(message: string, status = 400, code = "E_DEFAULT_FAILURE") {
-		super(message, status, code);
+export default class UnauthorizedException extends Exception {
+	constructor(
+		message: string,
+		code = 403,
+		errorCode = "E_UNAUTHORIZED_ACCESS"
+	) {
+		super(message, code, errorCode);
 	}
 }

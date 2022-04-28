@@ -1,7 +1,7 @@
 import BaseSeeder from "@ioc:Adonis/Lucid/Seeder";
 import { DateTime } from "luxon";
 
-import Role from "App/Models/Permission/Role";
+// own
 import User from "App/Models/User";
 
 export default class UsersSeeder extends BaseSeeder {
@@ -16,8 +16,6 @@ export default class UsersSeeder extends BaseSeeder {
 			firstname: "Miguel Alejandro",
 			lastname: "Salgado Ramírez",
 		});
-		user.related("roles").sync([
-			(await Role.findBy("name", "administrator"))!.id,
-		]);
+		await user.assignRole("administrator");
 	}
 }

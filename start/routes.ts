@@ -18,10 +18,4 @@
 |
 */
 
-import Route from "@ioc:Adonis/Core/Route";
-
-Route.group(() => {
-	Route.group(() => {
-		Route.post("/login", "Auth/AuthenticateController.login");
-	}).prefix("/auth");
-}).prefix("/api");
+import "./api";

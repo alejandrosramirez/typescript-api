@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import Hash from "@ioc:Adonis/Core/Hash";
-import { compose } from "@ioc:Adonis/Core/Helpers";
+import { compose, types } from "@ioc:Adonis/Core/Helpers";
 import {
 	column,
 	beforeSave,
@@ -74,4 +74,82 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 
 	@hasOne(() => Profile)
 	public profile: HasOne<typeof Profile>;
+
+	public async assignRole(roles: string[] | string | number) {
+		const rolesToAssign: number[] = [];
+
+		if (types.isArray(roles)) {
+			for (const r of roles) {
+				const selectedRole = await Role.findByOrFail("name", r);
+				rolesToAssign.push(selectedRole.id);
+			}
+		} else if (types.isString(roles)) {
+			const selectedRole = await Role.findByOrFail("name", roles);
+			rolesToAssign.push(selectedRole.id);
+		} else {
+			const selectedRole = await Role.findByOrFail("id", roles);
+			rolesToAssign.push(selectedRole.id);
+		}
+
+		this.related("roles" as any).sync(rolesToAssign);
+	}
+
+	public async syncRoles(roles: string[] | string | number) {
+		this.related("roles" as any).detach();
+
+		await this.assignRole(roles);
+	}
+
+	public async revokeRole(role: string) {
+		const selectedRole = await Role.findByOrFail("name", role);
+
+		this.related("roles" as any).detach([selectedRole.id]);
+	}
+
+	public async hasRole(roles: string[]) {
+		await this.load("roles" as any);
+
+		for (const role of roles) {
+			if (this.roles.find((r) => r.name === role)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public async hasPermission(permissions: string[]) {
+		await this.load("permissions" as any);
+
+		for (const permission of permissions) {
+			if (this.permissions.find((p) => p.name === permission)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public async hasPermissionThroughRole(permissions: string[]) {
+		await this.load("roles" as any, (query) => {
+			query.preload("permissions");
+		});
+
+		for (const permission of permissions) {
+			for (const role of this.roles) {
+				if (role.permissions.find((p) => p.name === permission)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public async hasPermissionTo(permissions: string[]) {
+		return (
+			(await this.hasPermission(permissions)) ||
+			(await this.hasPermissionThroughRole(permissions))
+		);
+	}
 }
