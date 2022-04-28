@@ -18,6 +18,12 @@ export default class AuthenticateController {
 		});
 	}
 
+	public async logout({ auth, response }: HttpContextContract) {
+		return response.json({
+			logout: await auth.logout(),
+		});
+	}
+
 	public async profile({ auth, response }: HttpContextContract) {
 		const user = auth.user;
 
