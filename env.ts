@@ -22,6 +22,8 @@ export default Env.rules({
 	DRIVE_DISK: Env.schema.enum(["local"] as const),
 	NODE_ENV: Env.schema.enum(["development", "production", "test"] as const),
 
+	AUTH_EXPIRES_IN: Env.schema.string(),
+
 	SESSION_DRIVER: Env.schema.string(),
 
 	DB_CONNECTION: Env.schema.string(),

@@ -69,12 +69,18 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 	})
 	public permissions: ManyToMany<typeof Permission>;
 
-	@manyToMany(() => Role, { pivotTable: "role_user", pivotTimestamps: true })
+	@manyToMany(() => Role, {
+		pivotTable: "role_user",
+		pivotTimestamps: true,
+	})
 	public roles: ManyToMany<typeof Role>;
 
 	@hasOne(() => Profile)
 	public profile: HasOne<typeof Profile>;
 
+	/**
+	 * Assigns user roles
+	 */
 	public async assignRole(roles: string[] | string | number) {
 		const rolesToAssign: number[] = [];
 
@@ -94,18 +100,27 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 		this.related("roles" as any).sync(rolesToAssign);
 	}
 
-	public async syncRoles(roles: string[] | string | number) {
+	/**
+	 * Refresh user roles
+	 */
+	public async syncRole(roles: string[] | string | number) {
 		this.related("roles" as any).detach();
 
 		await this.assignRole(roles);
 	}
 
+	/**
+	 * Revoke user role
+	 */
 	public async revokeRole(role: string) {
 		const selectedRole = await Role.findByOrFail("name", role);
 
 		this.related("roles" as any).detach([selectedRole.id]);
 	}
 
+	/**
+	 * Checks if user has role
+	 */
 	public async hasRole(roles: string[]) {
 		await this.load("roles" as any);
 
@@ -118,6 +133,61 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 		return false;
 	}
 
+	/**
+	 * Assigns user permissions
+	 */
+	public async assignPermission(permissions: string[] | string | number) {
+		const permissionsToAssign: number[] = [];
+
+		if (types.isArray(permissions)) {
+			for (const p of permissions) {
+				const selectedPermission = await Permission.findByOrFail(
+					"name",
+					p
+				);
+				permissionsToAssign.push(selectedPermission.id);
+			}
+		} else if (types.isString(permissions)) {
+			const selectedPermission = await Permission.findByOrFail(
+				"name",
+				permissions
+			);
+			permissionsToAssign.push(selectedPermission.id);
+		} else {
+			const selectedPermission = await Permission.findByOrFail(
+				"id",
+				permissions
+			);
+			permissionsToAssign.push(selectedPermission.id);
+		}
+
+		this.related("permissions" as any).sync(permissionsToAssign);
+	}
+
+	/**
+	 * Refresh user permissions
+	 */
+	public async syncPermission(permissions: string[] | string | number) {
+		this.related("permissions" as any).detach();
+
+		await this.assignPermission(permissions);
+	}
+
+	/**
+	 * Revoke user permission
+	 */
+	public async revokePermission(permission: string) {
+		const selectedPermission = await Permission.findByOrFail(
+			"name",
+			permission
+		);
+
+		this.related("permissions" as any).detach([selectedPermission.id]);
+	}
+
+	/**
+	 * Checks if user has permission
+	 */
 	public async hasPermission(permissions: string[]) {
 		await this.load("permissions" as any);
 
@@ -130,6 +200,9 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 		return false;
 	}
 
+	/**
+	 * Checks if user has permission through role
+	 */
 	public async hasPermissionThroughRole(permissions: string[]) {
 		await this.load("roles" as any, (query) => {
 			query.preload("permissions");
@@ -146,6 +219,9 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 		return false;
 	}
 
+	/**
+	 * Checks if user has permission directly or through role
+	 */
 	public async hasPermissionTo(permissions: string[]) {
 		return (
 			(await this.hasPermission(permissions)) ||

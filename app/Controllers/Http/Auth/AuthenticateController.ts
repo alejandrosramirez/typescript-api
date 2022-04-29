@@ -1,12 +1,15 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { RequestContract } from "@ioc:Adonis/Core/Request";
 import { rules, schema } from "@ioc:Adonis/Core/Validator";
+import Env from "@ioc:Adonis/Core/Env";
 
 export default class AuthenticateController {
 	public async login({ auth, request, response }: HttpContextContract) {
 		const { email, password } = await this.handleRequest(request);
 
-		const { token } = await auth.use("api").attempt(email, password);
+		const { token } = await auth.use("api").attempt(email, password, {
+			expiresIn: Env.get("AUTH_EXPIRES_IN", "7d"),
+		});
 
 		const user = auth.use("api").user;
 
@@ -20,7 +23,7 @@ export default class AuthenticateController {
 
 	public async logout({ auth, response }: HttpContextContract) {
 		return response.json({
-			logout: await auth.logout(),
+			logout: await auth.use("api").revoke(),
 		});
 	}
 
