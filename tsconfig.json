@@ -27,7 +27,8 @@
 			"@adonisjs/mail",
 			"@adonisjs/redis",
 			"adonis-request-throttler",
-			"adonis-lucid-soft-deletes"
+			"adonis-lucid-soft-deletes",
+			"@mezielabs/adonis-stripe"
 		]
 	}
 }

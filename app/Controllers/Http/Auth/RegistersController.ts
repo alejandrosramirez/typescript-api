@@ -28,26 +28,11 @@ export default class RegistersController {
 
 	private async handleRequest(request: RequestContract) {
 		const validateSchema = schema.create({
-			firstname: schema.string({ trim: true }, [
-				rules.required(),
-				rules.maxLength(255),
-			]),
-			lastname: schema.string({ trim: true }, [
-				rules.required(),
-				rules.maxLength(255),
-			]),
-			email: schema.string({ trim: true }, [
-				rules.required(),
-				rules.email(),
-			]),
-			password: schema.string({ trim: true }, [
-				rules.required(),
-				rules.minLength(8),
-			]),
-			phone: schema.string({ trim: true }, [
-				rules.required(),
-				rules.maxLength(30),
-			]),
+			firstname: schema.string([rules.required(), rules.maxLength(255)]),
+			lastname: schema.string([rules.required(), rules.maxLength(255)]),
+			email: schema.string([rules.required(), rules.email()]),
+			password: schema.string([rules.required(), rules.minLength(8)]),
+			phone: schema.string([rules.required(), rules.maxLength(30)]),
 		});
 
 		const validated = await request.validate({ schema: validateSchema });

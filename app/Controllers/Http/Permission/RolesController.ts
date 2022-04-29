@@ -96,23 +96,16 @@ export default class RolesController {
 	private async handleRequest(request: RequestContract, uuid = "NULL") {
 		const uniqueDescriptionValidation =
 			uuid === "NULL"
-				? [
-						rules.unique({
-							table: "roles",
-							column: "name",
-							where: { uuid },
-						}),
-				  ]
+				? [rules.unique({ table: "roles", column: "description" })]
 				: [];
 
 		const validateSchema = schema.create({
-			description: schema.string({ trim: true }, [
-				rules.required(),
+			description: schema.string([
 				rules.maxLength(255),
 				...uniqueDescriptionValidation,
 			]),
 			permissions: schema
-				.array([rules.required(), rules.minLength(1)])
+				.array([rules.minLength(1)])
 				.members(schema.string()),
 		});
 

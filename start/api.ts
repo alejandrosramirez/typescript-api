@@ -23,5 +23,13 @@ Route.group(() => {
 			Route.put("/:uuid", "Permission/RolesController.update");
 			Route.delete("/:uuid", "Permission/RolesController.destroy");
 		}).prefix("/roles");
+
+		Route.group(() => {
+			Route.get("/", "User/UsersController.index");
+			Route.post("/", "User/UsersController.store");
+			Route.get("/:uuid", "User/UsersController.show");
+			Route.put("/:uuid", "User/UsersController.update");
+			Route.delete("/:uuid", "User/UsersController.destroy");
+		}).prefix("/users");
 	}).middleware("auth:api");
 }).prefix("/api");
