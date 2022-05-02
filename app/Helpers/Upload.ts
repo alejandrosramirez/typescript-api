@@ -5,11 +5,13 @@ import sharp from "sharp";
 
 export default class Upload {
 	public static async image(
-		disk: "local" | "s3" | "gcs" = "local",
+		disk: "local" | "uploads" | "files" | "s3" | "gcs" = "local",
 		file: MultipartFileContract,
 		width: number,
 		height: number,
-		lastFile = ""
+		lastFile = "",
+		x = 0,
+		y = 0
 	) {
 		if (lastFile !== "") {
 			const url = lastFile.split("/");
@@ -50,7 +52,37 @@ export default class Upload {
 		}
 	}
 
-	// public static async file(disk = "local", file: any) {}
+	public static async file(
+		disk: "local" | "uploads" | "files" | "s3" | "gcs" = "local",
+		file: MultipartFileContract
+	) {
+		const extension = file.extname!;
 
-	// public static async delete(disk = "local", file: any) {}
+		const fileName = `file_${cuid()}.${extension}`;
+
+		await Drive.use(disk).put(fileName, Buffer.from(file.toString()));
+
+		const fileUrl = await Drive.use(disk).getUrl(fileName);
+
+		if (fileUrl) {
+			return {
+				url: fileUrl,
+				name: file.clientName,
+			};
+		}
+	}
+
+	public static async delete(
+		disk: "local" | "uploads" | "files" | "s3" | "gcs" = "local",
+		file: string
+	) {
+		const url = file.split("/");
+		const lastFile = url[url.length - 1];
+
+		const exists = await Drive.use(disk).exists(lastFile);
+
+		if (exists) {
+			await Drive.use(disk).delete(lastFile);
+		}
+	}
 }

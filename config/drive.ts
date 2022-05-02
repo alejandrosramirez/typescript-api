@@ -53,7 +53,7 @@ const driveConfig: DriveConfig = {
 			| files.
 			|
 			*/
-			root: Application.tmpPath("uploads"),
+			root: Application.tmpPath("local"),
 
 			/*
 			|--------------------------------------------------------------------------
@@ -77,7 +77,41 @@ const driveConfig: DriveConfig = {
 			| you are not registering routes with this prefix.
 			|
 			*/
+			basePath: "/local",
+		},
+
+		/*
+		|--------------------------------------------------------------------------
+		| Uploads
+		|--------------------------------------------------------------------------
+		|
+		| Uses the local file system to manage uploads. Make sure to turn off serving
+		| files when not using this disk.
+		|
+		*/
+		uploads: {
+			driver: "local",
+			visibility: "public",
+			root: Application.tmpPath("uploads"),
+			serveFiles: true,
 			basePath: "/uploads",
+		},
+
+		/*
+		|--------------------------------------------------------------------------
+		| files
+		|--------------------------------------------------------------------------
+		|
+		| Uses the local file system to manage files. Make sure to turn off serving
+		| files when not using this disk.
+		|
+		*/
+		files: {
+			driver: "local",
+			visibility: "private",
+			root: Application.tmpPath("files"),
+			serveFiles: true,
+			basePath: "/files",
 		},
 
 		/*

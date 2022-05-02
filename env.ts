@@ -103,4 +103,7 @@ export default Env.rules({
 
 	GCS_KEY_FILENAME: Env.schema.string(),
 	GCS_BUCKET: Env.schema.string(),
+
+	VONAGE_KEY: Env.schema.string(),
+	VONAGE_SECRET: Env.schema.string(),
 });

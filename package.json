@@ -1,7 +1,11 @@
 {
-	"name": "ts-api",
+	"name": "typescript-api",
 	"version": "1.0.0",
 	"private": true,
+	"author": {
+		"name": "Miguel Alejandro Salgado Ramírez",
+		"email": "alejandrosram@outlook.com"
+	},
 	"scripts": {
 		"dev": "node ace serve --watch",
 		"build": "node ace build --production",
@@ -68,6 +72,7 @@
 		"@adonisjs/shield": "^7.0.10",
 		"@adonisjs/view": "^6.1.4",
 		"@mezielabs/adonis-stripe": "^1.0.5",
+		"@vonage/server-sdk": "^2.10.11",
 		"@vscode/sqlite3": "^5.0.8",
 		"adonis-lucid-soft-deletes": "^1.3.3",
 		"adonis-request-throttler": "^2.0.3",
