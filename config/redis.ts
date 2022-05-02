@@ -26,15 +26,15 @@ const redisConfig: RedisConfig = {
 
 	connections: {
 		/*
-    |--------------------------------------------------------------------------
-    | The default connection
-    |--------------------------------------------------------------------------
-    |
-    | The main connection you want to use to execute redis commands. The same
-    | connection will be used by the session provider, if you rely on the
-    | redis driver.
-    |
-    */
+		|--------------------------------------------------------------------------
+		| The default connection
+		|--------------------------------------------------------------------------
+		|
+		| The main connection you want to use to execute redis commands. The same
+		| connection will be used by the session provider, if you rely on the
+		| redis driver.
+		|
+		*/
 		local: {
 			host: Env.get("REDIS_HOST"),
 			port: Env.get("REDIS_PORT"),

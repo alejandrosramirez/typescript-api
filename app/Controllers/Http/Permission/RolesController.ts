@@ -34,9 +34,7 @@ export default class RolesController {
 
 		await role.assignPermission(permissions);
 
-		return response.json({
-			role,
-		});
+		return response.json({ role });
 	}
 
 	public async show({ request, response }: HttpContextContract) {
@@ -46,9 +44,7 @@ export default class RolesController {
 
 		await role.load("users");
 
-		return response.json({
-			role,
-		});
+		return response.json({ role });
 	}
 
 	public async update({ request, response }: HttpContextContract) {
@@ -68,9 +64,7 @@ export default class RolesController {
 
 		await role.syncPermission(permissions);
 
-		return response.json({
-			role,
-		});
+		return response.json({ role });
 	}
 
 	public async destroy({ request, response }: HttpContextContract) {
@@ -88,9 +82,7 @@ export default class RolesController {
 
 		await role.delete();
 
-		return response.json({
-			role,
-		});
+		return response.json({ role });
 	}
 
 	private async handleRequest(request: RequestContract, uuid = "NULL") {
@@ -100,7 +92,7 @@ export default class RolesController {
 				: [];
 
 		const validateSchema = schema.create({
-			description: schema.string([
+			description: schema.string({ trim: true }, [
 				rules.maxLength(255),
 				...uniqueDescriptionValidation,
 			]),

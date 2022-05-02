@@ -101,11 +101,14 @@ export default class UsersController {
 				: [];
 
 		const validateSchema = schema.create({
-			firstname: schema.string([rules.maxLength(255)]),
-			lastname: schema.string([rules.maxLength(255)]),
-			phone: schema.string([rules.maxLength(30)]),
-			email: schema.string([rules.email(), ...uniqueEmailValidation]),
-			password: schema.string.optional([
+			firstname: schema.string({ trim: true }, [rules.maxLength(255)]),
+			lastname: schema.string({ trim: true }, [rules.maxLength(255)]),
+			phone: schema.string({ trim: true }, [rules.maxLength(30)]),
+			email: schema.string({ trim: true }, [
+				rules.email(),
+				...uniqueEmailValidation,
+			]),
+			password: schema.string.optional({ trim: true }, [
 				...passwordValidation,
 				rules.minLength(8),
 			]),

@@ -15,10 +15,7 @@ export default class AuthenticateController {
 
 		await user?.load("profile");
 
-		return response.json({
-			token,
-			user,
-		});
+		return response.json({ token, user });
 	}
 
 	public async logout({ auth, response }: HttpContextContract) {
@@ -36,9 +33,7 @@ export default class AuthenticateController {
 			});
 		});
 
-		return response.json({
-			user,
-		});
+		return response.json({ user });
 	}
 
 	private async handleRequest(request: RequestContract) {

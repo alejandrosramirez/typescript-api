@@ -94,4 +94,13 @@ export default Env.rules({
 	STRIPE_WEBHOOK_SECRET: Env.schema.string(),
 	STRIPE_API_VERSION: Env.schema.string(),
 	STRIPE_TYPESCRIPT: Env.schema.string(),
+
+	S3_KEY: Env.schema.string(),
+	S3_SECRET: Env.schema.string(),
+	S3_BUCKET: Env.schema.string(),
+	S3_REGION: Env.schema.string(),
+	S3_ENDPOINT: Env.schema.string.optional(),
+
+	GCS_KEY_FILENAME: Env.schema.string(),
+	GCS_BUCKET: Env.schema.string(),
 });

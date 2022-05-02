@@ -28,7 +28,9 @@
 			"@adonisjs/redis",
 			"adonis-request-throttler",
 			"adonis-lucid-soft-deletes",
-			"@mezielabs/adonis-stripe"
+			"@mezielabs/adonis-stripe",
+			"@adonisjs/drive-s3",
+			"@adonisjs/drive-gcs"
 		]
 	}
 }
