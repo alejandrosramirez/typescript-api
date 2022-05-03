@@ -5,10 +5,10 @@ import { rules, schema } from "@ioc:Adonis/Core/Validator";
 // own
 import User from "App/Models/User";
 
-export default class RegistersController {
+export default class RegisterController {
 	public async store({ request, response }: HttpContextContract) {
-		const { firstname, lastname, email, password, phone } =
-			await this.handleRequest(request);
+		const { firstname, lastname, email, password, phone } = request.all();
+		// await this.handleRequest(request);
 
 		const user = await User.create({
 			email,

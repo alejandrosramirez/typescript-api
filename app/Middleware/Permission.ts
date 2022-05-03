@@ -1,7 +1,7 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 // own
-import UnauthorizedException from "App/Exceptions/UnauthorizedException";
+import ForbiddenException from "App/Exceptions/ForbiddenException";
 
 export default class Permission {
 	protected async checkPermission(
@@ -14,7 +14,7 @@ export default class Permission {
 			return true;
 		}
 
-		throw new UnauthorizedException(
+		throw new ForbiddenException(
 			"You are not authorized to perform this action"
 		);
 	}

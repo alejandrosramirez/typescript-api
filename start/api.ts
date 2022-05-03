@@ -4,6 +4,7 @@ Route.group(() => {
 	Route.group(() => {
 		Route.group(() => {
 			Route.post("/login", "Auth/AuthenticateController.login");
+			Route.post("/register", "Auth/RegisterController.store");
 		}).prefix("/auth");
 	});
 
